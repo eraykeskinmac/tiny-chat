@@ -54,3 +54,23 @@ function componentToHex(c: number): string {
   const hex = c.toString(16);
   return hex.length === 1 ? "0" + hex : hex;
 }
+
+function modifyColor(
+  hslColors: string[],
+  saturationValues: number[],
+  lightnessValues: number[]
+): string[] {
+  const modifiesHslColors: string[] = [];
+
+  for (let i = 0; i < hslColors.length; i++) {
+    const hslColor = hslColors[i];
+    const saturationValue = saturationValues[i];
+    const lightnessValue = lightnessValues[i];
+
+    const currentHue = hslColor.match(/hsl\((\d+), (\d+)%, (\d+)%\)/)![1];
+
+    const modifiedHslColor = `hsl(${currentHue}, ${saturationValue}%, ${lightnessValue}%)`;
+    modifiesHslColors.push(modifiedHslColor);
+  }
+  return modifiesHslColors;
+}
