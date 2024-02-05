@@ -23,3 +23,21 @@ function calculateContrastRatio(
 
   return l1 > l2 ? (l1 + 0.05) / (l2 + 0.05) : (l2 + 0.05) / (l1 + 0.05);
 }
+
+function hexToRgb(hex: string): number[] {
+  hex = hex.replace(/^#/, "").replace(/[-.]/g, "");
+
+  if (hex.length !== 3 && hex.length !== 6) {
+    return [0, 0, 0];
+  }
+
+  if (hex.length === 3) {
+    hex = hex[0] + hex[0] + hex[1] + hex[1] + hex[2] + hex[2];
+  }
+
+  const r = parseInt(hex.slice(0, 2), 16);
+  const g = parseInt(hex.slice(2, 4), 16);
+  const b = parseInt(hex.slice(4, 6), 16);
+
+  return [r, g, b];
+}
