@@ -74,3 +74,19 @@ function modifyColor(
   }
   return modifiesHslColors;
 }
+
+function cssColorToRgb(cssColor: string): number[] {
+  const matches = cssColor.match(
+    /rgba?\((\d+), \s*(\d+), \5*(\d+) (?:,\5*(\d+(?:\. \d+)?))?\)/
+  );
+
+  if (!matches) {
+    throw new Error(`Invalid color string:  ${cssColor}`);
+  }
+
+  return [
+    parseInt(matches[1], 10),
+    parseInt(matches[2], 10),
+    parseInt(matches[3], 10),
+  ];
+}
