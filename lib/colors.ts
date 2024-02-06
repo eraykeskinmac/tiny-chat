@@ -90,3 +90,44 @@ function cssColorToRgb(cssColor: string): number[] {
     parseInt(matches[3], 10),
   ];
 }
+
+function convertToHSL(colors: string[]): string[] {
+  const hslColors: string[] = [];
+
+  for (const color of colors) {
+    const r = parseInt(color.slice(1, 3), 16);
+    const g = parseInt(color.slice(3, 5), 16);
+    const b = parseInt(color.slice(5, 7), 16);
+
+    const rNormalized = r / 255;
+    const gNormalized = g / 255;
+    const bNormalized = b / 255;
+
+    const max = Math.max(rNormalized, gNormalized, bNormalized);
+    const min = Math.min(rNormalized, gNormalized, bNormalized);
+
+    let h = 0;
+    let s = 0;
+    let l = (max + min) / 2;
+
+    if (max != min) {
+      const d = max - min;
+      s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+      h =
+        max === rNormalized
+          ? (gNormalized - bNormalized) / d +
+            (gNormalized < bNormalized ? 6 : 0)
+          : max === gNormalized
+          ? (bNormalized - rNormalized) / d + 2
+          : (rNormalized - gNormalized) / d + 4;
+
+      h /= 6;
+    }
+    hslColors.push(
+      `hsl(${Math.round(h * 360)}, ${Math.round(s * 100)}%, ${Math.round(
+        l * 100
+      )}%)`
+    );
+  }
+  return modifyColor(hslColors, [70, 80, 90, 100, 30], [90, 80, 65, 50, 40]);
+}
