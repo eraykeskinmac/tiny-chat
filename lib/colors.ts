@@ -131,3 +131,43 @@ function convertToHSL(colors: string[]): string[] {
   }
   return modifyColor(hslColors, [70, 80, 90, 100, 30], [90, 80, 65, 50, 40]);
 }
+
+function generateColors(color1: string, color2: string): string[] {
+  const [r1, g1, b1] = hexToRgb(color1);
+  const [r2, g2, b2] = hexToRgb(color2);
+  const [rRef, gRef, bRef] = cssColorToRgb("rgba(0,0,0,0.7)");
+
+  const avgR = Math.floor((r1 + r2) / 2);
+  const avgG = Math.floor((g1 + g2) / 2);
+  const avgB = Math.floor((b1 + b2) / 2);
+
+  let color3 = rgbToHex(avgR + 20, avgG - 20, avgB - 20);
+  let color4 = rgbToHex(avgR - 20, avgG + 20, avgB + 20);
+  let color5 = rgbToHex(avgR + 20, avgG + 20, avgB - 20);
+  let color6 = rgbToHex(avgR - 20, avgG - 20, avgB + 20);
+  let color7 = rgbToHex(avgR + 20, avgG - 20, avgB + 20);
+
+  const minContrastRatio: number = 4.5;
+  [color3, color4, color5, color6, color7] = [
+    color3,
+    color4,
+    color5,
+    color6,
+    color7,
+  ].map((color) => {
+    const [r, g, b] = hexToRgb(color);
+    const contrastRatio = calculateContrastRatio(r, g, b, rRef, gRef, bRef);
+    if (contrastRatio < minContrastRatio) {
+      const factor = (minContrastRatio + 0.55) / contrastRatio;
+      return rgbToHex(
+        Math.min(255, Math.max(0, Math.round(r * factor))),
+        Math.min(255, Math.max(0, Math.round(g * factor))),
+        Math.min(255, Math.max(0, Math.round(b * factor)))
+      );
+    } else {
+      return color;
+    }
+  });
+
+  return convertToHSL([]);
+}
