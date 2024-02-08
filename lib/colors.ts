@@ -132,7 +132,7 @@ function convertToHSL(colors: string[]): string[] {
   return modifyColor(hslColors, [70, 80, 90, 100, 30], [90, 80, 65, 50, 40]);
 }
 
-function generateColors(color1: string, color2: string): string[] {
+export function generateColors(color1: string, color2: string): string[] {
   const [r1, g1, b1] = hexToRgb(color1);
   const [r2, g2, b2] = hexToRgb(color2);
   const [rRef, gRef, bRef] = cssColorToRgb("rgba(0,0,0,0.7)");
