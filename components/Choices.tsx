@@ -1,11 +1,11 @@
-import { Choice } from "@/lib/types";
+import { ChoiceDefinition } from "@/lib/types";
 import { RadioGroup } from "@headlessui/react";
 import clsx from "clsx";
 
 interface ChoiceProps {
-  choices: Choice[];
-  initialValue: Choice;
-  setValue: (_: Choice) => void;
+  choices: ChoiceDefinition[];
+  initialValue: ChoiceDefinition;
+  setValue: (_: ChoiceDefinition) => void;
 }
 
 export default function Choices({

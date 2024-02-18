@@ -1,7 +1,6 @@
-import { GradientBackground } from "@/lib/types";
+import { LanguageDefinition, ThemeDefinition } from "@/lib/types";
 import { Listbox, Transition } from "@headlessui/react";
 import { ChevronDownIcon } from "@radix-ui/react-icons";
-import { LanguageName } from "@uiw/codemirror-extensions-langs";
 import clsx from "clsx";
 import { Fragment } from "react";
 
@@ -20,7 +19,7 @@ function ThemeBubble({ color }: { color: string }) {
   );
 }
 
-export default function Select<T extends GradientBackground | LanguageName>({
+export default function Select<T extends ThemeDefinition | LanguageDefinition>({
   type,
   initialValue,
   setValue,
@@ -38,9 +37,9 @@ export default function Select<T extends GradientBackground | LanguageName>({
           )}
         >
           {type === "language" ? (
-            <span>{initialValue as LanguageName}</span>
+            <span>{(initialValue as LanguageDefinition).label}</span>
           ) : (
-            <ThemeBubble color={(initialValue as GradientBackground).class} />
+            <ThemeBubble color={(initialValue as ThemeDefinition).class} />
           )}
           <span className="pointer-event-none">
             <ChevronDownIcon className="h-3 w-3" aria-hidden="true" />
@@ -73,15 +72,13 @@ export default function Select<T extends GradientBackground | LanguageName>({
                 >
                   {type === "language" ? (
                     <span className="block truncate pr-9">
-                      {option as LanguageName}
+                      {option.label as any}
                     </span>
                   ) : (
                     <>
-                      <ThemeBubble
-                        color={(option as GradientBackground).class}
-                      />
+                      <ThemeBubble color={(option as ThemeDefinition).class} />
                       <span className="block truncate">
-                        {(option as GradientBackground).name}
+                        {(option as ThemeDefinition).label}
                       </span>
                     </>
                   )}

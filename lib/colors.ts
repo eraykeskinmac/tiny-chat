@@ -77,7 +77,7 @@ function modifyColor(
 
 function cssColorToRgb(cssColor: string): number[] {
   const matches = cssColor.match(
-    /rgba?\((\d+), \s*(\d+), \5*(\d+) (?:,\5*(\d+(?:\. \d+)?))?\)/
+    /rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*(\d+(?:\.\d+)?))?\)/
   );
 
   if (!matches) {
@@ -170,4 +170,20 @@ export function generateColors(color1: string, color2: string): string[] {
   });
 
   return convertToHSL([]);
+}
+
+export function hslToHsla(color: string, a: number): string {
+  const values = color.match(/^hsl\((\d+),\s*([\d.]+)%,\s*([\d.]+)%\)$/);
+
+  if (!values) {
+    throw new Error(`Invalid HSL color: ${color}`);
+  }
+
+  const h = parseInt(values[1], 10);
+  const s = parseInt(values[2], 10);
+  const l = parseInt(values[3], 10);
+
+  a = Math.max(0, Math.min(1, a));
+
+  return `hsla(${h}, ${s}%, ${l}%, ${a})`;
 }

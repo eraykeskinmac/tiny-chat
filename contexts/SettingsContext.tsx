@@ -1,3 +1,5 @@
+"use client";
+
 import { SUPPORTED_LANGUAGES } from "@/lib/languages";
 import { SUPPORTED_PADDING_CHOICES, SUPPORTED_THEMES } from "@/lib/theme";
 import {
