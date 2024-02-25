@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss";
+import tailwindConfig from "tailwindcss/stubs/tailwind.config";
 
 const config: Config = {
   content: [
@@ -17,6 +18,6 @@ const config: Config = {
       },
     },
   },
-  plugins: [],
+  plugins: [require("@headlessui/tailwindcss")],
 };
 export default config;
