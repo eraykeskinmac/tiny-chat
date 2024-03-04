@@ -1,11 +1,15 @@
-import { LanguageDefinition, ThemeDefinition } from "@/lib/types";
+import {
+  FontDefinition,
+  LanguageDefinition,
+  ThemeDefinition,
+} from "@/lib/types";
 import { Listbox, Transition } from "@headlessui/react";
 import { ChevronDownIcon } from "@radix-ui/react-icons";
 import clsx from "clsx";
-import { Fragment } from "react";
+import { Fragment, memo } from "react";
 
 interface SelectProps<T> {
-  type: "language" | "theme";
+  type: "language" | "theme" | "font";
   initialValue: T;
   setValue: (_: T) => void;
   options: T[];
@@ -19,28 +23,82 @@ function ThemeBubble({ color }: { color: string }) {
   );
 }
 
-export default function Select<T extends ThemeDefinition | LanguageDefinition>({
-  type,
-  initialValue,
-  setValue,
-  options,
-}: SelectProps<T>) {
+export default memo(function Select<
+  T extends ThemeDefinition | LanguageDefinition | FontDefinition,
+>({ type, initialValue, setValue, options }: SelectProps<T>) {
+  const getInitialValue = (type: string) => {
+    switch (type) {
+      case "language":
+        return <span>{(initialValue as LanguageDefinition).label}</span>;
+      case "theme":
+        return <ThemeBubble color={(initialValue as ThemeDefinition).class} />;
+      case "font":
+        return (
+          <span
+            className={clsx(
+              (initialValue as FontDefinition).value === "--font-fira-code"
+                ? "font-firaCode"
+                : "font-jetBrainsMono",
+            )}
+          >
+            {(initialValue as FontDefinition).label}
+          </span>
+        );
+      default:
+        return null;
+    }
+  };
+  const getOptionContent = (
+    type: string,
+    option: ThemeDefinition | LanguageDefinition | FontDefinition,
+  ) => {
+    switch (type) {
+      case "language":
+        return (
+          <span className="block truncate pr-9">
+            {(option as LanguageDefinition).label}
+          </span>
+        );
+      case "theme":
+        return (
+          <>
+            <ThemeBubble color={(option as ThemeDefinition).class} />
+            <span className="block truncate">
+              {(option as ThemeDefinition).label}
+            </span>
+          </>
+        );
+      case "font":
+        return (
+          <span
+            className={clsx(
+              (initialValue as FontDefinition).value === "--font-fira-code"
+                ? "font-firaCode"
+                : "font-jetBrainsMono",
+            )}
+          >
+            {(initialValue as FontDefinition).label}
+          </span>
+        );
+      default:
+        return null;
+    }
+  };
+
   return (
     <Listbox value={initialValue} onChange={setValue}>
       <div className="relative">
         <Listbox.Button
           className={clsx(
-            "flex select-none items-center justify-between gap-3 rounded-lg p-2 text-xs",
+            "flex w-auto select-none items-center justify-between gap-3 rounded-lg p-2 text-xs",
             "border-[1px] border-white/20 bg-black",
             "transition-colors duration-200 ease-in-out",
-            "hover:cursor-pointer hover:bg-white/20 focus:outline-none"
+            "hover:cursor-pointer hover:bg-white/20 focus:outline-none",
+            type === "language" && "w-32 ",
+            type === "font" && "w-40 ",
           )}
         >
-          {type === "language" ? (
-            <span>{(initialValue as LanguageDefinition).label}</span>
-          ) : (
-            <ThemeBubble color={(initialValue as ThemeDefinition).class} />
-          )}
+          {getInitialValue(type)}
           <span className="pointer-event-none">
             <ChevronDownIcon className="h-3 w-3" aria-hidden="true" />
           </span>
@@ -57,7 +115,7 @@ export default function Select<T extends ThemeDefinition | LanguageDefinition>({
               className={clsx(
                 "absolute z-10 max-h-80 -translate-x-1/4 -translate-y-3/4 space-y-1 overflow-auto rounded-xl p-2",
                 "border-[1px] border-white/20 bg-black",
-                "focus-outline-none"
+                "focus-outline-none",
               )}
             >
               {options.map((option, i) => (
@@ -67,21 +125,10 @@ export default function Select<T extends ThemeDefinition | LanguageDefinition>({
                   className={clsx(
                     "flex items-center gap-3 rounded-lg p-2 text-xs",
                     "cursor-pointer select-none",
-                    "transition-colors duration-200 ease-in-out"
+                    "transition-colors duration-200 ease-in-out",
                   )}
                 >
-                  {type === "language" ? (
-                    <span className="block truncate pr-9">
-                      {option.label as any}
-                    </span>
-                  ) : (
-                    <>
-                      <ThemeBubble color={(option as ThemeDefinition).class} />
-                      <span className="block truncate">
-                        {(option as ThemeDefinition).label}
-                      </span>
-                    </>
-                  )}
+                  {getOptionContent(type, option)}
                 </Listbox.Option>
               ))}
             </Listbox.Options>
@@ -90,4 +137,4 @@ export default function Select<T extends ThemeDefinition | LanguageDefinition>({
       </div>
     </Listbox>
   );
-}
+});

@@ -1,9 +1,42 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import {
+  Fira_Code,
+  IBM_Plex_Mono,
+  Inconsolata,
+  Inter,
+  JetBrains_Mono,
+  Source_Code_Pro,
+} from "next/font/google";
 import "./globals.css";
 import { SettingsProvider } from "@/contexts/SettingsContext";
+import clsx from "clsx";
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
+const firaCode = Fira_Code({
+  subsets: ["latin"],
+  variable: "--font-fira-code",
+});
+
+const jetBrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  variable: "--font-jetbrains-mono",
+});
+
+const inconssolata = Inconsolata({
+  subsets: ["latin"],
+  variable: "--font-inconsolata",
+});
+
+const sourceCodePro = Source_Code_Pro({
+  subsets: ["latin"],
+  variable: "--font-source-code-pro",
+});
+
+const ibmPlexMono = IBM_Plex_Mono({
+  weight: ["400"],
+  style: ["normal", "italic"],
+  variable: "--font-ibm-plex-mono",
+});
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -18,7 +51,21 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.className} h-full`}>
-        <SettingsProvider>{children}</SettingsProvider>
+        <main
+          className={clsx(
+            "h-full flex items-center justify-center flex-col gap-6",
+            inter.variable,
+            firaCode.variable,
+            jetBrainsMono.variable,
+            inconssolata.variable,
+            sourceCodePro.variable,
+            ibmPlexMono.variable,
+            "font-sans",
+          )}
+          id="main"
+        >
+          <SettingsProvider>{children}</SettingsProvider>
+        </main>
       </body>
     </html>
   );

@@ -24,7 +24,8 @@ export default function Code({ placeholder, initialValue }: CodeProps) {
     setCode(value);
   }, []);
 
-  const { language, theme, lineNumbers, padding } = useSettingsContext();
+  const { language, theme, fontStyle, lineNumbers, padding } =
+    useSettingsContext();
 
   useEffect(() => {
     async function loadLanguage() {
@@ -46,13 +47,24 @@ export default function Code({ placeholder, initialValue }: CodeProps) {
     "&.cm-gutterElement": {
       display: "flex",
       justifyContent: "flex-end",
+      paddingRight: "1rem !important",
       lineHeight: "1.5rem",
       letterSpacing: ".1px",
     },
     "&.cm-content": {
-      paddingLeft: "1rem",
       lineHeight: "1.5rem",
       letterSpacing: ".1px",
+    },
+  });
+
+  const customFontStyle = EditorView.theme({
+    ".cm-content *": {
+      fontFamily: fontStyle.value,
+      fontVariantLigatures: "normal",
+    },
+    ".cm-gutters": {
+      fontFamily: fontStyle.value,
+      fontVariantLiagtures: "normal",
     },
   });
 
@@ -179,7 +191,7 @@ export default function Code({ placeholder, initialValue }: CodeProps) {
         padding.class,
         "bg-gradient-to-br",
         theme.class,
-        "transition-all duration-200 ease-in-out"
+        "transition-all duration-200 ease-in-out",
       )}
     >
       <motion.div
@@ -189,14 +201,14 @@ export default function Code({ placeholder, initialValue }: CodeProps) {
         <div
           className={clsx(
             "absolute inset-0 rounded-xl",
-            "after:absolute after:inset-0 after:z-[2] after:translate-y-6 after:rounded-xl after:bg-black/60 after:blur-xl"
+            "after:absolute after:inset-0 after:z-[2] after:translate-y-6 after:rounded-xl after:bg-black/60 after:blur-xl",
           )}
         >
           <div
             className={clsx(
               "absolute inset-0 z-[3] rounded-xl",
               "bg-gradient-to-br",
-              theme.class
+              theme.class,
             )}
           />
         </div>
@@ -208,6 +220,7 @@ export default function Code({ placeholder, initialValue }: CodeProps) {
               extensions={[
                 selectedLanguage,
                 styleTheme,
+                customFontStyle,
                 EditorView.lineWrapping,
               ]}
               basicSetup={{

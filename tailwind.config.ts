@@ -1,5 +1,5 @@
 import type { Config } from "tailwindcss";
-import tailwindConfig from "tailwindcss/stubs/tailwind.config";
+import { fontFamily } from "tailwindcss/defaultTheme";
 
 const config: Config = {
   content: [
@@ -15,6 +15,14 @@ const config: Config = {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+      },
+      fontFamily: {
+        sans: ["var(--font-inter)", ...fontFamily.sans],
+        firaCode: ["var(--font-fira-code)", ...fontFamily.mono],
+        jetBrainsMono: ["var(--font-jetbrains-mono)", ...fontFamily.mono],
+        inconsolate: ["var(--font-inconsolata)", ...fontFamily.mono],
+        sourceCodePro: ["var(--font-source-code-pro)", ...fontFamily.mono],
+        ibmPlexMono: ["var(--font-ibm-plex-mono)", ...fontFamily.mono],
       },
     },
   },
