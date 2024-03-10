@@ -24,8 +24,23 @@ function ThemeBubble({ color }: { color: string }) {
 }
 
 export default memo(function Select<
-  T extends ThemeDefinition | LanguageDefinition | FontDefinition,
+  T extends ThemeDefinition | LanguageDefinition | FontDefinition
 >({ type, initialValue, setValue, options }: SelectProps<T>) {
+  const getClassName = (fontVariable: string) => {
+    switch (fontVariable) {
+      case "var(--font-fira-code)":
+        return "font-firaCode";
+      case "var(--font-jetbrains-mono)":
+        return "font-jetBrainsMono";
+      case "var(--font-incosolata)":
+        return "font-inconsolata";
+      case "var(--font-source-code-pro)":
+        return "font-sourceCodePro";
+      default:
+        return "font-mono";
+    }
+  };
+
   const getInitialValue = (type: string) => {
     switch (type) {
       case "language":
@@ -36,9 +51,7 @@ export default memo(function Select<
         return (
           <span
             className={clsx(
-              (initialValue as FontDefinition).value === "--font-fira-code"
-                ? "font-firaCode"
-                : "font-jetBrainsMono",
+              getClassName((initialValue as FontDefinition).value)
             )}
           >
             {(initialValue as FontDefinition).label}
@@ -50,7 +63,7 @@ export default memo(function Select<
   };
   const getOptionContent = (
     type: string,
-    option: ThemeDefinition | LanguageDefinition | FontDefinition,
+    option: ThemeDefinition | LanguageDefinition | FontDefinition
   ) => {
     switch (type) {
       case "language":
@@ -71,13 +84,9 @@ export default memo(function Select<
       case "font":
         return (
           <span
-            className={clsx(
-              (initialValue as FontDefinition).value === "--font-fira-code"
-                ? "font-firaCode"
-                : "font-jetBrainsMono",
-            )}
+            className={clsx(getClassName((option as FontDefinition).value))}
           >
-            {(initialValue as FontDefinition).label}
+            {(option as FontDefinition).label}
           </span>
         );
       default:
@@ -95,7 +104,7 @@ export default memo(function Select<
             "transition-colors duration-200 ease-in-out",
             "hover:cursor-pointer hover:bg-white/20 focus:outline-none",
             type === "language" && "w-32 ",
-            type === "font" && "w-40 ",
+            type === "font" && "w-40 "
           )}
         >
           {getInitialValue(type)}
@@ -115,7 +124,7 @@ export default memo(function Select<
               className={clsx(
                 "absolute z-10 max-h-80 -translate-x-1/4 -translate-y-3/4 space-y-1 overflow-auto rounded-xl p-2",
                 "border-[1px] border-white/20 bg-black",
-                "focus-outline-none",
+                "focus-outline-none"
               )}
             >
               {options.map((option, i) => (
@@ -125,7 +134,7 @@ export default memo(function Select<
                   className={clsx(
                     "flex items-center gap-3 rounded-lg p-2 text-xs",
                     "cursor-pointer select-none",
-                    "transition-colors duration-200 ease-in-out",
+                    "transition-colors duration-200 ease-in-out"
                   )}
                 >
                   {getOptionContent(type, option)}

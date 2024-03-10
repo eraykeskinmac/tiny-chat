@@ -191,7 +191,7 @@ export default function Code({ placeholder, initialValue }: CodeProps) {
         padding.class,
         "bg-gradient-to-br",
         theme.class,
-        "transition-all duration-200 ease-in-out",
+        "transition-all duration-200 ease-in-out"
       )}
     >
       <motion.div
@@ -201,14 +201,14 @@ export default function Code({ placeholder, initialValue }: CodeProps) {
         <div
           className={clsx(
             "absolute inset-0 rounded-xl",
-            "after:absolute after:inset-0 after:z-[2] after:translate-y-6 after:rounded-xl after:bg-black/60 after:blur-xl",
+            "after:absolute after:inset-0 after:z-[2] after:translate-y-6 after:rounded-xl after:bg-black/60 after:blur-xl"
           )}
         >
           <div
             className={clsx(
               "absolute inset-0 z-[3] rounded-xl",
               "bg-gradient-to-br",
-              theme.class,
+              theme.class
             )}
           />
         </div>
