@@ -4,26 +4,26 @@ export const SUPPORTED_FONT_STYLES: FontDefinition[] = [
   {
     id: "fira_code",
     label: "Fira Code",
-    value: "var(--font-fira-code)",
+    variable: "var(--font-fira-code)",
   },
   {
     id: "jetbrains_mono",
     label: "JetBrains Mono",
-    value: "var(--font-jetbrains-mono)",
+    variable: "var(--font-jetbrains-mono)",
   },
   {
     id: "inconsolata",
     label: "Inconsolata",
-    value: "var(--font-inconsolata)",
+    variable: "var(--font-inconsolata)",
   },
   {
     id: "source_code_pro",
     label: "Source Code Pro",
-    value: "var(--font-source-code-pro)",
+    variable: "var(--font-source-code-pro)",
   },
   {
     id: "ibm_plex_mono",
     label: "IBM Plex Mono",
-    value: "var(--font-ibm-plex-mono)",
+    variable: "var(--font-ibm-plex-mono)",
   },
 ];

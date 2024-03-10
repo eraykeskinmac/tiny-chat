@@ -51,7 +51,7 @@ export default memo(function Select<
         return (
           <span
             className={clsx(
-              getClassName((initialValue as FontDefinition).value)
+              getClassName((initialValue as FontDefinition).variable)
             )}
           >
             {(initialValue as FontDefinition).label}
@@ -84,7 +84,7 @@ export default memo(function Select<
       case "font":
         return (
           <span
-            className={clsx(getClassName((option as FontDefinition).value))}
+            className={clsx(getClassName((option as FontDefinition).variable))}
           >
             {(option as FontDefinition).label}
           </span>
