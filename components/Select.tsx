@@ -49,11 +49,7 @@ export default memo(function Select<
         return <ThemeBubble color={(initialValue as ThemeDefinition).class} />;
       case "font":
         return (
-          <span
-            className={clsx(
-              getClassName((initialValue as FontDefinition).variable)
-            )}
-          >
+          <span className={clsx((initialValue as FontDefinition).class)}>
             {(initialValue as FontDefinition).label}
           </span>
         );
@@ -83,10 +79,8 @@ export default memo(function Select<
         );
       case "font":
         return (
-          <span
-            className={clsx(getClassName((option as FontDefinition).variable))}
-          >
-            {(option as FontDefinition).label}
+          <span className={clsx((initialValue as FontDefinition).class)}>
+            {(option as FontDefinition).class}
           </span>
         );
       default:

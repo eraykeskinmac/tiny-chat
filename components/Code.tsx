@@ -53,7 +53,6 @@ export default function Code({ placeholder, initialValue }: CodeProps) {
     },
     "&.cm-content": {
       lineHeight: "1.5rem",
-      letterSpacing: ".1px",
     },
   });
 
