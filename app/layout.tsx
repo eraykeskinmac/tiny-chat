@@ -10,7 +10,6 @@ import {
 import "./globals.css";
 import { SettingsProvider } from "@/contexts/SettingsContext";
 import clsx from "clsx";
-import { motion } from "framer-motion";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const firaCode = Fira_Code({
@@ -57,11 +56,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.className} h-full`}>
-        <motion.main
+        <main
           id="main"
-          animate={{ opacity: 1 }}
-          initial={{ opacity: 0 }}
-          transition={{ duration: 0.2, delay: 0.3 }}
+          // animate={{ opacity: 1 }}
+          // initial={{ opacity: 0 }}
+          // transition={{ duration: 0.2, delay: 0.3 }}
           className={clsx(
             "h-full flex items-center justify-center flex-col gap-6",
             inter.variable,
@@ -74,7 +73,7 @@ export default function RootLayout({
           )}
         >
           <SettingsProvider>{children}</SettingsProvider>
-        </motion.main>
+        </main>
       </body>
     </html>
   );
