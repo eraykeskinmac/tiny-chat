@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "prisma-migrate-dev": "sudo npx prisma migrate dev"
   },
   "dependencies": {
     "@codemirror/lang-javascript": "^6.2.1",
