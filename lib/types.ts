@@ -43,7 +43,7 @@ export type Message =
 
 export type AppStatus = {
   message: Message;
-  hasCustomMessage: boolean;
+  hasCustomTheme: boolean;
 };
 
 export type AppState = {
