@@ -31,7 +31,7 @@ export type Message =
   | "SUCCESS"
   | "ERROR"
   | "UNAUTHORIZED"
-  | "TO_MANY_REQUESTS"
+  | "TOO_MANY_REQUESTS"
   | "LIMIT_REACHED"
   | "EMPTY_EDITOR"
   | "UNKNOWN_ERROR"
