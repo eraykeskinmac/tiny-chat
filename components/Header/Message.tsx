@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import { Message } from "@/lib/types";
 import { Check, Code, X } from "lucide-react";
 import Loader from "../ui/Loader";
+import { cn } from "@/lib/cn";
+import { AnimatePresence, motion } from "framer-motion";
 
 interface ContentState {
   id: string;
@@ -90,5 +92,52 @@ export default function Message() {
       setShowMessage(true);
       setContent(CONTENT_STATES[message]!);
     }
-  });
+
+    if (message !== "PENDING") {
+      timeoutId = setTimeout(() => {
+        update("message", "IDLE");
+      }, 2500);
+    }
+
+    return () => {
+      if (timeoutId) {
+        clearTimeout(timeoutId);
+      }
+    };
+  }, [message, update]);
+
+  useEffect(() => {
+    if (pathname === "/") {
+      update("message", "IDLE");
+    }
+  }, [pathname, update]);
+
+  return (
+    <div className={cn("absolute left-1/2 -translate-x-1/2")}>
+      <AnimatePresence mode="wait">
+        {showMessage && content && (
+          <Wrapper key={content.id} content={content} />
+        )}
+      </AnimatePresence>
+    </div>
+  );
+}
+
+function Wrapper({ content }: { content: ContentState }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: -5 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: 5 }}
+      transition={{ duration: 0.1 }}
+      className={cn(
+        "flex items-center  justify-between gap-2 p-2 text-xs",
+        "select-none",
+        content.additionalClasses
+      )}
+    >
+      {content.icon}
+      {content.text}
+    </motion.div>
+  );
 }
