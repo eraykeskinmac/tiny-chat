@@ -3,6 +3,7 @@ import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { cn } from "@/lib/cn";
 import { ArrowLeft } from "lucide-react";
+import Kbd from "../ui/Kbd";
 
 export default function Home() {
   const router = useRouter();
@@ -37,6 +38,7 @@ export default function Home() {
             Dashboard
           </ArrowLeft>
         </div>
+        <Kbd keys={["B"]} />
       </Link>
     </div>
   );
