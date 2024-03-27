@@ -11,6 +11,11 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      colors: {
+        "almost-black": "#161616",
+        "almost-white": "#f2f2f2",
+        greylish: "#b3b3b3",
+      },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
@@ -26,6 +31,10 @@ const config: Config = {
       },
     },
   },
-  plugins: [require("@headlessui/tailwindcss")],
+  plugins: [
+    require("@headlessui/tailwindcss"),
+    require("tailwindcss-animate"),
+    require("tailwindcss-radix"),
+  ],
 };
 export default config;
