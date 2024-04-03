@@ -15,7 +15,7 @@ interface SelectProps<T> {
   options: T[];
 }
 
-function ThemeBubble({ color }: { color: string }) {
+export function ThemeBubble({ color }: { color: string }) {
   return (
     <span
       className={clsx("block h-4 w-4 rounded-full bg-gradient-to-br", color)}
