@@ -234,7 +234,7 @@ export default function Snippets({
                             backgroundImage: `linear-gradient(${angle})deg,${(theme ===
                             "custom"
                               ? (customColors as string[])
-                              : find(SUPPORTED_THEMES, theme).baseColors
+                              : find(SUPPORTED_THEMES, theme).generatedColors
                             ).join(" ,")}`,
                           }}
                         />
