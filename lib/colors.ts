@@ -16,7 +16,7 @@ function calculateContrastRatio(
   b1: number,
   r2: number,
   g2: number,
-  b2: number
+  b2: number,
 ): number {
   const l1 = calculateLuminance(r1, g1, b1);
   const l2 = calculateLuminance(r2, g2, b2);
@@ -25,7 +25,7 @@ function calculateContrastRatio(
 }
 
 function hexToRgb(hex: string): number[] {
-  hex = hex.replace(/^#/, "").replace(/[-.]/g, "");
+  hex = hex.replace(/^#/, '').replace(/[-.]/g, '');
 
   if (hex.length !== 3 && hex.length !== 6) {
     return [0, 0, 0];
@@ -47,18 +47,18 @@ function rgbToHex(r: number, g: number, b: number): string {
   g = Math.max(0, Math.min(255, g));
   b = Math.max(0, Math.min(255, b));
 
-  return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
+  return '#' + componentToHex(r) + componentToHex(g) + componentToHex(b);
 }
 
 function componentToHex(c: number): string {
   const hex = c.toString(16);
-  return hex.length === 1 ? "0" + hex : hex;
+  return hex.length === 1 ? '0' + hex : hex;
 }
 
 function modifyColors(
   hslColors: string[],
   saturationValues: number[],
-  lightnessValues: number[]
+  lightnessValues: number[],
 ): string[] {
   const modifiedHslColors: string[] = [];
 
@@ -79,7 +79,7 @@ function modifyColors(
 
 function cssColorToRgb(cssColor: string): number[] {
   const matches = cssColor.match(
-    /rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*(\d+(?:\.\d+)?))?\)/
+    /rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*(\d+(?:\.\d+)?))?\)/,
   );
 
   if (!matches) {
@@ -120,15 +120,15 @@ function convertToHSL(colors: string[]): string[] {
           ? (gNormalized - bNormalized) / d +
             (gNormalized < bNormalized ? 6 : 0)
           : max === gNormalized
-          ? (bNormalized - rNormalized) / d + 2
-          : (rNormalized - gNormalized) / d + 4;
+            ? (bNormalized - rNormalized) / d + 2
+            : (rNormalized - gNormalized) / d + 4;
       h /= 6;
     }
 
     hslColors.push(
       `hsl(${Math.round(h * 360)}, ${Math.round(s * 100)}%, ${Math.round(
-        l * 100
-      )}%)`
+        l * 100,
+      )}%)`,
     );
   }
   return modifyColors(hslColors, [70, 80, 90, 100, 30], [90, 80, 65, 50, 40]);
@@ -138,7 +138,7 @@ export function generateColors(colors: string[]): string[] {
   let avgR = 0;
   let avgG = 0;
   let avgB = 0;
-  const [rRef, gRef, bRef] = cssColorToRgb("rgba(0,0,0,0.7)");
+  const [rRef, gRef, bRef] = cssColorToRgb('rgba(0,0,0,0.7)');
 
   if (colors.length > 0) {
     let totalR = 0;
@@ -183,7 +183,7 @@ export function generateColors(colors: string[]): string[] {
       return rgbToHex(
         Math.min(255, Math.max(0, Math.round(r * factor))),
         Math.min(255, Math.max(0, Math.round(g * factor))),
-        Math.min(255, Math.max(0, Math.round(b * factor)))
+        Math.min(255, Math.max(0, Math.round(b * factor))),
       );
     } else {
       return color;
@@ -195,7 +195,7 @@ export function generateColors(colors: string[]): string[] {
   const adjustedColors = modifyColors(
     hslColors,
     [100, 93, 98, 100, 91],
-    [90, 80, 70, 60, 50]
+    [90, 80, 70, 60, 50],
   );
 
   const shifedColors = shiftHue(adjustedColors);
@@ -209,7 +209,7 @@ export function shiftHue(colors: string[]): string[] {
   for (const degree of [-45, 45]) {
     for (const color of colors) {
       const match = color.match(
-        /hsl\((\d+), (\d+)%, (\d+)%\)/
+        /hsl\((\d+), (\d+)%, (\d+)%\)/,
       ) as RegExpMatchArray;
 
       const hue = match[1];
