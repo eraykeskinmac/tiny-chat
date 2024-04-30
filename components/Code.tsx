@@ -1,13 +1,16 @@
-"use client";
-import { useSettingsContext } from "@/contexts/SettingsContext";
-import { EditorView } from "@codemirror/view";
-import createTheme from "@uiw/codemirror-themes";
-import clsx from "clsx";
-import { useCallback, useEffect, useState } from "react";
-import { hslToHsla as adjustLightness } from "@/lib/colors";
-import { tags as t } from "@lezer/highlight";
-import { motion } from "framer-motion";
-import ReactCodeMirror from "@uiw/react-codemirror";
+'use client';
+
+import { useCallback, useEffect, useState } from 'react';
+
+import { EditorView } from '@codemirror/view';
+import { tags as t } from '@lezer/highlight';
+import createTheme from '@uiw/codemirror-themes';
+import ReactCodeMirror from '@uiw/react-codemirror';
+import clsx from 'clsx';
+import { motion } from 'framer-motion';
+
+import { useSettingsContext } from '@/contexts/SettingsContext';
+import { hslToHsla as adjustLightness } from '@/lib/colors';
 
 interface CodeProps {
   placeholder?: string;
@@ -38,58 +41,58 @@ export default function Code({ placeholder, initialValue }: CodeProps) {
   }, [language]);
 
   const styleTheme = EditorView.baseTheme({
-    "&.cm-editor": {
-      fontSize: "0.9375rem",
+    '&.cm-editor': {
+      fontSize: '0.9375rem',
     },
-    "&.cm-editor.cm-focused": {
-      outline: "none",
+    '&.cm-editor.cm-focused': {
+      outline: 'none',
     },
-    "&.cm-gutterElement": {
-      display: "flex",
-      justifyContent: "flex-end",
-      paddingRight: "1rem !important",
-      lineHeight: "1.5rem",
-      letterSpacing: ".1px",
+    '&.cm-gutterElement': {
+      display: 'flex',
+      justifyContent: 'flex-end',
+      paddingRight: '1rem !important',
+      lineHeight: '1.5rem',
+      letterSpacing: '.1px',
     },
-    "&.cm-content": {
-      lineHeight: "1.5rem",
+    '&.cm-content': {
+      lineHeight: '1.5rem',
     },
   });
 
   const customFontStyle = EditorView.theme({
-    ".cm-content *": {
+    '.cm-content *': {
       fontFamily: fontStyle.variable,
-      fontVariantLigatures: "normal",
+      fontVariantLigatures: 'normal',
     },
-    ".cm-gutters": {
+    '.cm-gutters': {
       fontFamily: fontStyle.variable,
-      fontVariantLiagtures: "normal",
+      fontVariantLiagtures: 'normal',
     },
   });
 
   const c = theme.generatedColors;
 
   const myTheme = createTheme({
-    theme: "dark",
+    theme: 'dark',
     settings: {
-      background: "transparent",
-      foreground: "white",
+      background: 'transparent',
+      foreground: 'white',
       caret: c.at(0),
       selection: adjustLightness(c.at(0)!, 0.1),
       selectionMatch: adjustLightness(c.at(1)!, 0.2),
-      lineHighlight: "transparent",
-      gutterBackground: "transparent",
+      lineHighlight: 'transparent',
+      gutterBackground: 'transparent',
       gutterForeground: adjustLightness(c.at(0)!, 0.4),
-      gutterBorder: "transparent",
+      gutterBorder: 'transparent',
     },
     styles: [
       {
         tag: [t.emphasis],
-        fontStyle: "italic",
+        fontStyle: 'italic',
       },
       {
         tag: [t.strong],
-        fontStyle: "bold",
+        fontStyle: 'bold',
       },
       {
         tag: [t.link],
@@ -97,7 +100,7 @@ export default function Code({ placeholder, initialValue }: CodeProps) {
       },
       {
         tag: [t.comment, t.lineComment, t.blockComment, t.docComment],
-        fontStyle: "italic",
+        fontStyle: 'italic',
         color: adjustLightness(c.at(0)!, 0.4),
       },
       {
@@ -113,9 +116,9 @@ export default function Code({ placeholder, initialValue }: CodeProps) {
       {
         tag: t.variableName,
         color: c.at(5),
-        fontStyle: "italic",
+        fontStyle: 'italic',
       },
-      { tag: t.propertyName, color: c.at(5), fontStyle: "italic" },
+      { tag: t.propertyName, color: c.at(5), fontStyle: 'italic' },
       { tag: t.definition(t.variableName), color: c.at(10) },
       { tag: t.definition(t.propertyName), color: c.at(8) },
       {
@@ -173,7 +176,7 @@ export default function Code({ placeholder, initialValue }: CodeProps) {
       {
         tag: [t.heading],
         color: c.at(1),
-        fontWeight: "bold",
+        fontWeight: 'bold',
       },
       {
         tag: [t.quote],
@@ -186,11 +189,11 @@ export default function Code({ placeholder, initialValue }: CodeProps) {
     <motion.div
       layout
       className={clsx(
-        "relative z-0 w-auto min-w-[512px] max-w-5xl",
+        'relative z-0 w-auto min-w-[512px] max-w-5xl',
         padding.class,
-        "bg-gradient-to-br",
+        'bg-gradient-to-br',
         theme.class,
-        "transition-all duration-200 ease-in-out"
+        'transition-all duration-200 ease-in-out',
       )}
     >
       <motion.div
@@ -199,15 +202,15 @@ export default function Code({ placeholder, initialValue }: CodeProps) {
       >
         <div
           className={clsx(
-            "absolute inset-0 rounded-xl",
-            "after:absolute after:inset-0 after:z-[2] after:translate-y-6 after:rounded-xl after:bg-black/60 after:blur-xl"
+            'absolute inset-0 rounded-xl',
+            'after:absolute after:inset-0 after:z-[2] after:translate-y-6 after:rounded-xl after:bg-black/60 after:blur-xl',
           )}
         >
           <div
             className={clsx(
-              "absolute inset-0 z-[3] rounded-xl",
-              "bg-gradient-to-br",
-              theme.class
+              'absolute inset-0 z-[3] rounded-xl',
+              'bg-gradient-to-br',
+              theme.class,
             )}
           />
         </div>

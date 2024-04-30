@@ -1,12 +1,13 @@
-import { create } from "zustand";
-import { Store } from "./types";
-import { devtools } from "zustand/middleware";
-import { DEFAULT_VALUES } from "./values";
-import { produce } from "immer";
-import { find } from "./find";
-import { SUPPORTED_LANGUAGES } from "./languages";
-import { SUPPORTED_FONT_STYLES } from "./fonts";
-import { SUPPORTED_THEMES } from "./theme";
+import { produce } from 'immer';
+import { create } from 'zustand';
+import { devtools } from 'zustand/middleware';
+
+import { find } from './find';
+import { SUPPORTED_FONT_STYLES } from './fonts';
+import { SUPPORTED_LANGUAGES } from './languages';
+import { SUPPORTED_THEMES } from './theme';
+import { Store } from './types';
+import { DEFAULT_VALUES } from './values';
 
 export const useStore = create<Store>()(
   devtools((set, get) => ({
@@ -15,7 +16,7 @@ export const useStore = create<Store>()(
       set(
         produce((state) => {
           state[type] = value;
-        })
+        }),
       );
     },
     setAppState: (snippet) => {
@@ -23,7 +24,7 @@ export const useStore = create<Store>()(
         produce((state) => {
           state.message = DEFAULT_VALUES.message;
           state.hasCustomTheme =
-            Boolean(snippet.theme === "custom") ||
+            Boolean(snippet.theme === 'custom') ||
             DEFAULT_VALUES.hasCustomTheme;
           state.id = snippet.id;
           state.title = snippet.title;
@@ -38,7 +39,7 @@ export const useStore = create<Store>()(
           state.colorMode = snippet.colorMode;
           state.angle = snippet.angle;
           state.grain = snippet.grain;
-        })
+        }),
       );
     },
     getAppState: () => {
@@ -78,22 +79,22 @@ export const useStore = create<Store>()(
       set(
         produce((state) => {
           state.customColors[i] = c;
-        })
+        }),
       );
     },
     addCustomColor: (c) => {
       set(
         produce((state) => {
           state.customColors.push(c);
-        })
+        }),
       );
     },
     removeCustomColor: (i) => {
       set(
         produce((state) => {
           state.customColors.splice(i, 1);
-        })
+        }),
       );
     },
-  }))
+  })),
 );
