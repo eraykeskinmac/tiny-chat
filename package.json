@@ -27,6 +27,7 @@
     "@uiw/codemirror-extensions-langs": "^4.21.21",
     "@uiw/codemirror-themes": "^4.21.21",
     "@uiw/react-codemirror": "^4.21.21",
+    "chroma-js": "^2.4.2",
     "clsx": "^2.1.0",
     "framer-motion": "^11.0.5",
     "immer": "^10.0.4",
@@ -45,6 +46,7 @@
     "zustand": "^4.5.2"
   },
   "devDependencies": {
+    "@types/chroma-js": "^2.4.4",
     "@types/lodash.isequal": "^4.5.8",
     "@types/node": "^20",
     "@types/react": "^18",
