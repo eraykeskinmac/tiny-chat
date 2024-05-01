@@ -83,4 +83,6 @@ export default function ChangeListener() {
       pendingSave.current = false;
     }
   }, [updatedSnippet, update]);
+
+  return null;
 }
