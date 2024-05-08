@@ -1,7 +1,10 @@
+import { useState } from 'react';
 import { useSession } from 'next-auth/react';
 
+import { AnimatePresence, motion } from 'framer-motion';
 import { Check, Copy, ImageIcon, Link, X } from 'lucide-react';
 
+import { cn } from '@/lib/cn';
 import { snap } from '@/lib/snap';
 
 import Loader from '../ui/Loader';
@@ -88,4 +91,69 @@ export default function Actions() {
       },
     },
   ];
+
+  return (
+    <div className={cn('grid gird-cols-3 place-items-center p-2')}>
+      {buttons.map((button) => (
+        <Button key={button.id} {...button} />
+      ))}
+    </div>
+  );
+}
+
+function Button({
+  id,
+  label,
+  icon,
+  action,
+  isDisabled = false,
+  hotKey,
+}: Button) {
+  const [buttonState, setButtonState] = useState<ButtonType>('DEFAULT');
+
+  async function wrappedAction() {
+    try {
+      await action();
+
+      setButtonState('SUCCESS');
+    } catch (e) {
+      setButtonState('FAILURE');
+    } finally {
+      const timer = setTimeout(() => setButtonState('DEFAULT'), 2500);
+
+      return () => clearTimeout(timer);
+    }
+  }
+
+  return (
+    <button
+      type="button"
+      onClick={wrappedAction}
+      disabled={buttonState !== 'DEFAULT' || isDisabled}
+      className={cn(
+        'flex items-center justify-center rounded-lg px-1.5 py-1',
+        'select-none outline-none',
+        'transition-all duration-100 ease-in-out',
+        'enabled:hover:bg-white/20 enabled:hover:text-almost-white',
+        'focus:text-almost-white',
+        'diabled:cursor-not-allowd disabled:opacity-50',
+      )}
+      aria-label={id}
+    >
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={buttonState}
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0, scale: 0.8 }}
+          transition={{ duration: 0.08, delay: 0.08 }}
+        >
+          <div className={cn('flex items-center gap-2')}>
+            {icon[buttonState]}
+            {label[buttonState] ?? label.DEFAULT}
+          </div>
+        </motion.div>
+      </AnimatePresence>
+    </button>
+  );
 }
