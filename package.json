@@ -31,6 +31,8 @@
     "@uiw/react-codemirror": "^4.21.21",
     "chroma-js": "^2.4.2",
     "clsx": "^2.1.0",
+    "dom-to-image": "^2.6.0",
+    "file-saver": "^2.0.5",
     "framer-motion": "^11.0.5",
     "immer": "^10.0.4",
     "lucide-react": "^0.359.0",
@@ -49,6 +51,8 @@
   },
   "devDependencies": {
     "@types/chroma-js": "^2.4.4",
+    "@types/dom-to-image": "^2.6.7",
+    "@types/file-saver": "^2.0.7",
     "@types/lodash.isequal": "^4.5.8",
     "@types/node": "^20",
     "@types/react": "^18",

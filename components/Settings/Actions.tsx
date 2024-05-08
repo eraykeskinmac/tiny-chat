@@ -1,6 +1,8 @@
 import { useSession } from 'next-auth/react';
 
-import { Check, X } from 'lucide-react';
+import { Check, Copy, ImageIcon, Link, X } from 'lucide-react';
+
+import { snap } from '@/lib/snap';
 
 import Loader from '../ui/Loader';
 
@@ -30,5 +32,60 @@ export default function Actions() {
     LOADING: <Loader />,
   };
 
-  const buttons: Button[] = [];
+  const buttons: Button[] = [
+    {
+      id: 'copy-link',
+      label: {
+        DEFAULT: 'Copy Link',
+        SUCCESS: 'Link Copied',
+      },
+      icon: {
+        DEFAULT: <Link size={16} aria-hidden="true" />,
+        ...statusIcons,
+      },
+      action: () => snap('COPY_LINK'),
+      isDisabled: sessionStatus === 'unauthenticated',
+      hotKey: {
+        key: 'meta+shift+c',
+        options: {
+          preventDefault: true,
+        },
+      },
+    },
+    {
+      id: 'copy-image',
+      label: {
+        DEFAULT: 'Copy Image',
+        SUCCESS: 'Image copied',
+      },
+      icon: {
+        DEFAULT: <Copy size={16} aria-hidden="true" />,
+        ...statusIcons,
+      },
+      action: () => snap('COPY_IMAGE'),
+      isDisabled: sessionStatus === 'unauthenticated',
+      hotKey: {
+        key: 'meta+c',
+      },
+    },
+    {
+      id: 'download-image',
+      label: {
+        DEFAULT: 'Download as PNG',
+        SUCCESS: 'Image download started',
+      },
+      icon: {
+        DEFAULT: <ImageIcon size={16} aria-hidden="true" />,
+        ...statusIcons,
+      },
+      action: () => snap('DOWNLOAD_IMAGE'),
+      isDisabled: sessionStatus === 'unauthenticated',
+      hotKey: {
+        key: 'meta+s',
+        options: {
+          preventDefault: true,
+        },
+      },
+    },
+  ];
 }
