@@ -1,5 +1,5 @@
-import { cn } from "@/lib/cn";
-import { useStore } from "@/lib/store";
+import { cn } from '@/lib/cn';
+import { useStore } from '@/lib/store';
 
 export default function ThemeBubble({
   style,
@@ -15,13 +15,13 @@ export default function ThemeBubble({
 
   return (
     <div
-      className={cn("h-4 w-4 rounded-full")}
+      className={cn('h-4 w-4 rounded-full')}
       style={
         style || {
           backgroundImage: `linear-gradient(${angle}deg, ${(useCustomColorsFromStore
             ? customColors
             : colors!
-          ).join(", ")})`,
+          ).join(', ')})`,
         }
       }
     />
