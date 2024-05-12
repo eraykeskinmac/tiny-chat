@@ -1,6 +1,7 @@
 import { memo } from 'react';
 
 import * as SelectPrimitive from '@radix-ui/react-select';
+import { ChevronDown } from 'lucide-react';
 
 import { cn } from '@/lib/cn';
 import { find } from '@/lib/find';
@@ -48,10 +49,10 @@ export default memo(function Select<
       optionContent: (option: T) => (
         <div className={cn('flex items-center gap-3')}>
           <ThemeBubble
-            colors={(value as ThemeDefinition).generatedColors}
+            colors={(option as ThemeDefinition).generatedColors}
             useCustomColorsFromStore={value.id === 'custom'}
           />
-          <span className={cn('block truncate ')}>
+          <span className={cn('block truncate')}>
             {(option as ThemeDefinition).label}
           </span>
         </div>
@@ -62,9 +63,12 @@ export default memo(function Select<
       initialValue: (
         <span className={(value as FontDefinition).class}>{value.label}</span>
       ),
-      optionConent: (option: T) => (
+      optionContent: (option: T) => (
         <span
-          className={cn('block truncate', (option as FontDefinition).class)}
+          className={cn(
+            'block truncate pr-12',
+            (option as FontDefinition).class,
+          )}
         >
           {(option as ThemeDefinition).label}
         </span>
@@ -93,6 +97,57 @@ export default memo(function Select<
           }
         }
       }}
-    ></SelectPrimitive.Root>
+    >
+      <SelectPrimitive.Trigger
+        className={cn(
+          'flex h-8 w-auto items-center justify-between gap-2 rounded-lg px-2',
+          'select-none outline-none',
+          'border border-white/20 bg-black',
+          'transition-all duration-100 ease-in-out',
+          'hover:bg-white/20 hover:text-amlost-white',
+          'focus:text-amlost-white focus:ring-1 focus:ring-amlost-white focus:ring-offset-2 focus:ring-offset-black',
+          type === 'language' && 'w-32',
+          type === 'fontFamily' && 'w-44',
+        )}
+        aria-label={`${type}-select`}
+      >
+        <SelectPrimitive.Value>{get[type].initialValue}</SelectPrimitive.Value>
+        <SelectPrimitive.Icon>
+          <ChevronDown size={16} aria-hidden="true" />
+        </SelectPrimitive.Icon>
+      </SelectPrimitive.Trigger>
+
+      <SelectPrimitive.Portal>
+        <SelectPrimitive.Content
+          position="popper"
+          sideOffset={-100}
+          align="center"
+          className={cn(
+            'relative z-50 overflow-hidden rounded-lg p-1',
+            'border border-white/20 bg-black/50 shadow-lg backdrop-blur-md',
+            'animate-in fade-in zoom-in-75 duration-100 ease-in-out',
+          )}
+        >
+          <SelectPrimitive.Viewport>
+            {options.map((option) => (
+              <SelectPrimitive.Item
+                key={`${type}-${option.id}`}
+                value={option.id}
+                className={cn(
+                  'rounded-[5px] p-1.5',
+                  'select-none outline-none',
+                  'transition-all duration-100 ease-in-out',
+                  'radix-highlighted:bg-white/20 radix-highlighted:text-amlost-white',
+                )}
+              >
+                <SelectPrimitive.ItemText>
+                  {get[type].optionContent(option as T)}
+                </SelectPrimitive.ItemText>
+              </SelectPrimitive.Item>
+            ))}
+          </SelectPrimitive.Viewport>
+        </SelectPrimitive.Content>
+      </SelectPrimitive.Portal>
+    </SelectPrimitive.Root>
   );
 });
