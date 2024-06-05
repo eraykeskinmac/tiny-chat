@@ -1,3 +1,4 @@
+import type { Metadata } from 'next';
 import {
   Fira_Code,
   IBM_Plex_Mono,
@@ -6,21 +7,17 @@ import {
   JetBrains_Mono,
   Source_Code_Pro,
 } from 'next/font/google';
-
-import type { Metadata } from 'next';
-
-import { SUPPORTED_FONT_STYLES as fonts } from '@/lib/fonts';
-
 import './globals.css';
-
-import clsx from 'clsx';
-
-import Header from '@/components/Header';
-import Providers from '@/contexts/Providers';
 import { SettingsProvider } from '@/contexts/SettingsContext';
+import clsx from 'clsx';
+import { motion } from 'framer-motion';
 import { cn } from '@/lib/cn';
+import { SUPPORTED_FONT_STYLES as fonts } from '@/lib/fonts';
+import Providers from '@/contexts/Providers';
+import Header from '@/components/Header';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
+
 const firaCode = Fira_Code({
   subsets: ['latin'],
   display: 'swap',
@@ -33,7 +30,7 @@ const jetBrainsMono = JetBrains_Mono({
   variable: '--font-jetbrains-mono',
 });
 
-const inconssolata = Inconsolata({
+const inconsolata = Inconsolata({
   subsets: ['latin'],
   display: 'swap',
   variable: '--font-inconsolata',
@@ -47,8 +44,8 @@ const sourceCodePro = Source_Code_Pro({
 
 const ibmPlexMono = IBM_Plex_Mono({
   weight: '400',
-  display: 'swap',
   subsets: ['latin'],
+  display: 'swap',
   variable: '--font-ibm-plex-mono',
 });
 
@@ -65,12 +62,17 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={cn(fonts[0].variable, fonts[1].variable, fonts[2].variable)}
+      className={cn(
+        // fonts..variable,
+        fonts[0].variable,
+        fonts[1].variable,
+        fonts[2].variable,
+      )}
     >
       <body
         className={cn(
-          'grid min-h-screen grid-rows-[auto, 1fr] text-sm',
-          'bg-almost-black text-greylish selection:bg-fuchsia-500 caret-fuchsia-500 selection:text-almost-white',
+          'grid min-h-screen grid-rows-[auto,1fr] text-sm',
+          'bg-almost-black text-greylish caret-fuchsia-500 selection:bg-fuchsia-500 selection:text-amlost-white',
         )}
       >
         <Providers>

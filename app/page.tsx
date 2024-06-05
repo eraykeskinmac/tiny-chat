@@ -1,5 +1,7 @@
 import Code from '@/components/Code';
+import Editor from '@/components/Editor';
 import Settings from '@/components/Settings';
+import { getSession } from 'next-auth/react';
 import {
   Fira_Code,
   IBM_Plex_Mono,
@@ -8,6 +10,7 @@ import {
   JetBrains_Mono,
   Source_Code_Pro,
 } from 'next/font/google';
+import { redirect } from 'next/navigation';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
 const firaCode = Fira_Code({
@@ -41,12 +44,16 @@ const ibmPlexMono = IBM_Plex_Mono({
   variable: '--font-ibm-plex-mono',
 });
 
-export default function Home() {
+export default async function Home() {
+  const session = await getSession();
+  const isAuthenticated = !!session;
+
+  if (session) {
+    redirect('/dashboard');
+  }
   return (
     <>
-      {/*<h1 className="text-4xl font-black">Code Share</h1>*/}
-      <Code initialValue="test" />
-      <Settings />
+      <Editor editable={true} isAuthenticated={isAuthenticated} />
     </>
   );
 }

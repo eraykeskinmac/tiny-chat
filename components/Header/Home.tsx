@@ -1,8 +1,9 @@
-import { usePathname, useRouter } from 'next/navigation';
-import { useSession } from 'next-auth/react';
-import Link from 'next/link';
+'use client';
 import { cn } from '@/lib/cn';
 import { ArrowLeft } from 'lucide-react';
+import { useSession } from 'next-auth/react';
+import Link from 'next/link';
+import { usePathname, useRouter } from 'next/navigation';
 import Kbd from '../ui/Kbd';
 
 export default function Home() {
@@ -34,10 +35,10 @@ export default function Home() {
               'group-hover:translate-x-0',
             )}
             aria-hidden="true"
-          >
-            Dashboard
-          </ArrowLeft>
+          />
+          Dashboard
         </div>
+
         <Kbd keys={['B']} />
       </Link>
     </div>

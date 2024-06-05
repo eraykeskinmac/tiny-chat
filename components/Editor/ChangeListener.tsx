@@ -1,11 +1,9 @@
-import { useEffect, useRef } from 'react';
-
-import isEqual from 'lodash.isequal';
-import useSWRMutation from 'swr/mutation';
-
 import { fetcher } from '@/lib/fetcher';
 import { useStore } from '@/lib/store';
 import { AppState } from '@/lib/types';
+import { useEffect, useRef } from 'react';
+import useSWRMutation from 'swr/mutation';
+import isEqual from 'lodash.isequal';
 
 export default function ChangeListener() {
   const prevState = useRef<AppState | null>(null);
@@ -16,10 +14,10 @@ export default function ChangeListener() {
 
   const {
     trigger: updateSnippet,
-    error: updateErorr,
+    error: updateError,
     data: updatedSnippet,
   } = useSWRMutation(
-    'api/snippets',
+    '/api/snippets',
     (url, { arg }: { arg: AppState }) =>
       fetcher(url, {
         method: 'PATCH',
@@ -67,15 +65,16 @@ export default function ChangeListener() {
         return cleanup;
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [state, updateSnippet, update]);
 
   useEffect(() => {
-    if (updateErorr) {
+    if (updateError) {
       update('message', 'ERROR');
 
       pendingSave.current = false;
     }
-  }, [updateErorr, update]);
+  }, [updateError, update]);
 
   useEffect(() => {
     if (updatedSnippet) {

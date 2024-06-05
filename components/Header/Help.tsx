@@ -1,3 +1,5 @@
+'use client';
+
 import { cn } from "@/lib/cn";
 import { useSession } from "next-auth/react";
 import { usePathname } from "next/navigation";
