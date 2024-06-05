@@ -1,3 +1,5 @@
+'use client';
+
 import { cn } from '@/lib/cn';
 import { fetcher } from '@/lib/fetcher';
 import { Check, Loader, Plus, X } from 'lucide-react';
