@@ -7,6 +7,7 @@ import Code from './Code';
 import TitleBar from './TitleBar';
 import Views from './Views';
 import Wrapper from './Wrapper';
+import Settings from '../Settings/index';
 
 export default function Editor({
   views,
@@ -30,7 +31,7 @@ export default function Editor({
         <Code editable={editable} />
       </Wrapper>
 
-      {editable && <></>}
+      {editable && <Settings />}
       {editable && isAuthenticated && <ChangeListener />}
     </div>
   );
