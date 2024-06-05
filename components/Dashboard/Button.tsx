@@ -1,12 +1,12 @@
-import { cn } from "@/lib/cn";
-import { fetcher } from "@/lib/fetcher";
-import { Check, Loader, Plus, X } from "lucide-react";
-import { useRouter } from "next/router";
-import { useState } from "react";
-import { useHotkeys } from "react-hotkeys-hook";
-import useSWRMutation from "swr";
+import { cn } from '@/lib/cn';
+import { fetcher } from '@/lib/fetcher';
+import { Check, Loader, Plus, X } from 'lucide-react';
+import { useRouter } from 'next/router';
+import { useState } from 'react';
+import { useHotkeys } from 'react-hotkeys-hook';
+import useSWRMutation from 'swr';
 
-type ButtonType = "DEFAULT" | "SUCCESS" | "ERROR";
+type ButtonType = 'DEFAULT' | 'SUCCESS' | 'ERROR';
 
 interface Button {
   id: string;
@@ -17,63 +17,63 @@ interface Button {
 
 const buttons: Record<ButtonType, Button> = {
   DEFAULT: {
-    id: "default",
-    text: "New",
+    id: 'default',
+    text: 'New',
     icon: <Plus size={16} aria-hidden="true" />,
     aditionalClasses:
-      "border-white/20 bg-black hover:bg-white/20 hover:text-almost-white disabled:brightness-50",
+      'border-white/20 bg-black hover:bg-white/20 hover:text-almost-white disabled:brightness-50',
   },
   SUCCESS: {
-    id: "success",
-    text: "Success",
+    id: 'success',
+    text: 'Success',
     icon: <Check size={16} aria-hidden="true" />,
-    aditionalClasses: "border-green-400/20 text-green-400 bg-green-500/20",
+    aditionalClasses: 'border-green-400/20 text-green-400 bg-green-500/20',
   },
   ERROR: {
-    id: "error",
-    text: "Error",
+    id: 'error',
+    text: 'Error',
     icon: <X size={16} aria-hidden="true" />,
-    aditionalClasses: "border-red-400/20 text-red-400 bg-red-500/20",
+    aditionalClasses: 'border-red-400/20 text-red-400 bg-red-500/20',
   },
 };
 
 export default function Button({ snippetCount }: { snippetCount: number }) {
-  const [buttonState, setButtonState] = useState<ButtonType>("DEFAULT");
+  const [buttonState, setButtonState] = useState<ButtonType>('DEFAULT');
   const router = useRouter();
 
   const { trigger: createSnippet, isMutating: createLoading } = useSWRMutation(
-    "/api/snippets",
+    '/api/snippets',
     (url) =>
       fetcher(url, {
-        method: "POST",
+        method: 'POST',
         body: JSON.stringify({ snippetCount }),
-      })
+      }),
   );
 
   const handleAction = async () => {
     try {
       const { id } = await createSnippet();
-      setButtonState("SUCCESS");
+      setButtonState('SUCCESS');
       router.push(`/${id}`);
     } catch {
-      setButtonState("ERROR");
+      setButtonState('ERROR');
     } finally {
-      const timer = setTimeout(() => setButtonState("DEFAULT"), 2500);
+      const timer = setTimeout(() => setButtonState('DEFAULT'), 2500);
 
       return () => clearTimeout(timer);
     }
   };
 
   useHotkeys(
-    "n",
+    'n',
     () => {
-      if (!createLoading && buttons[buttonState].id === "default") {
+      if (!createLoading && buttons[buttonState].id === 'default') {
         handleAction();
       }
     },
     {
       preventDefault: true,
-    }
+    },
   );
 
   return (
@@ -83,19 +83,19 @@ export default function Button({ snippetCount }: { snippetCount: number }) {
       disabled={
         snippetCount >= 10 ||
         createLoading ||
-        buttons[buttonState].id !== "default"
+        buttons[buttonState].id !== 'default'
       }
       className={cn(
-        "flex w-auto items-center gap-4 rounded-lg p-1 font-medium",
-        "select-none outline-none",
-        "border",
-        "transition-all duration-100 ease-in-out",
+        'flex w-auto items-center gap-4 rounded-lg p-1 font-medium',
+        'select-none outline-none',
+        'border',
+        'transition-all duration-100 ease-in-out',
         buttons[buttonState].aditionalClasses,
-        "focus:border-almost-white focus:text-almost-white",
-        "disabled:cursor-not-allowed"
+        'focus:border-almost-white focus:text-almost-white',
+        'disabled:cursor-not-allowed',
       )}
     >
-      <div className={cn("flex items-center gpa-2 pl-0.5")}>
+      <div className={cn('flex items-center gpa-2 pl-0.5')}>
         {createLoading ? <Loader /> : buttons[buttonState].icon}
         {buttons[buttonState].text}
       </div>

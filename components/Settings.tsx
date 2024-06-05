@@ -1,21 +1,21 @@
-"use client";
+'use client';
 
-import { useSettingsContext } from "@/contexts/SettingsContext";
-import { DragHandleDots2Icon } from "@radix-ui/react-icons";
-import clsx from "clsx";
-import { motion, useAnimationControls, useDragControls } from "framer-motion";
-import { useEffect, useState } from "react";
-import Select from "./Select";
-import { SUPPORTED_LANGUAGES } from "@/lib/languages";
-import { SUPPORTED_PADDING_CHOICES, SUPPORTED_THEMES } from "@/lib/theme";
-import Toggle from "./Toggle";
-import Choices from "./Choices";
-import { SUPPORTED_FONT_STYLES } from "@/lib/fonts";
+import { useSettingsContext } from '@/contexts/SettingsContext';
+import { DragHandleDots2Icon } from '@radix-ui/react-icons';
+import clsx from 'clsx';
+import { motion, useAnimationControls, useDragControls } from 'framer-motion';
+import { useEffect, useState } from 'react';
+import Select from './Select';
+import { SUPPORTED_LANGUAGES } from '@/lib/languages';
+import { SUPPORTED_PADDING_CHOICES, SUPPORTED_THEMES } from '@/lib/theme';
+import Toggle from './Toggle';
+import Choices from './Choices';
+import { SUPPORTED_FONT_STYLES } from '@/lib/fonts';
 import {
   FontDefinition,
   LanguageDefinition,
   ThemeDefinition,
-} from "@/lib/types";
+} from '@/lib/types';
 
 export default function Settings() {
   const [mainDimension, setMainDimension] = useState<{
@@ -47,7 +47,7 @@ export default function Settings() {
   const animationControls = useAnimationControls();
 
   useEffect(() => {
-    const main = document.querySelector("main");
+    const main = document.querySelector('main');
     let timeoutId: NodeJS.Timeout;
 
     const handleResize = () => {
@@ -67,17 +67,17 @@ export default function Settings() {
 
     setMainDimension({ height: main!.clientHeight, width: main!.clientWidth });
 
-    window.addEventListener("resize", handleResize);
+    window.addEventListener('resize', handleResize);
 
     return () => {
       clearTimeout(timeoutId);
-      window.removeEventListener("resize", handleResize);
+      window.removeEventListener('resize', handleResize);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
-    const settings = document.getElementById("settings");
+    const settings = document.getElementById('settings');
 
     setConstraints({
       top: -settings!.offsetTop + 24,
@@ -106,24 +106,24 @@ export default function Settings() {
       dragConstraints={constraints}
       animate={animationControls}
       className={clsx(
-        "fixed bottom-32 z-10 rounded-xl p-5 text-xs transition-opacity duration-200 ease-in-out will-change-transform",
-        "border-[1px] border-white/20 bg-black text-white/70 opacity-50 shadow-xl",
-        "focus-within:opacity-100 hover:opacity-100",
+        'fixed bottom-32 z-10 rounded-xl p-5 text-xs transition-opacity duration-200 ease-in-out will-change-transform',
+        'border-[1px] border-white/20 bg-black text-white/70 opacity-50 shadow-xl',
+        'focus-within:opacity-100 hover:opacity-100',
       )}
     >
       <motion.div
         onPointerDown={(e) => dragControls.start(e, { snapToCursor: false })}
-        whileTap={{ cursor: "grabbing" }}
+        whileTap={{ cursor: 'grabbing' }}
         className={clsx(
-          "absolute -top-[10px] left-1/2 py-[1px] px-[6px]",
-          "rounded-md border-[1px] border-white/20 bg-black",
-          "transition-all duration-200 ease-in-out will-change-transform",
-          "hover:scale-150 hover:cursor-grab hover:bg-gray-800 focus:outline-none",
+          'absolute -top-[10px] left-1/2 py-[1px] px-[6px]',
+          'rounded-md border-[1px] border-white/20 bg-black',
+          'transition-all duration-200 ease-in-out will-change-transform',
+          'hover:scale-150 hover:cursor-grab hover:bg-gray-800 focus:outline-none',
         )}
       >
         <DragHandleDots2Icon className="rotate-90" />
       </motion.div>
-      <div className={clsx("flex gap-8", "")}>
+      <div className={clsx('flex gap-8', '')}>
         <div>
           <label htmlFor="language">Language</label>
           <Select

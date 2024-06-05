@@ -159,8 +159,8 @@ export default function Help() {
                 "rounded-lg p-2",
                 "select-none outline-none",
                 "transition-all duration-100 ease-in-out",
-                "hover:bg-white/20 hover:text-almost-white",
-                "focus:text-almost-white focus:outline-1 focus:outline-offset-2 focus:outline-almost-white"
+                "hover:bg-white/20 hover:text-amlost-white",
+                "focus:text-amlost-white focus:outline-1 focus:outline-offset-2 focus:outline-amlost-white"
               )}
             >
               <Keyboard size={18} aria-hidden="true" />
@@ -171,7 +171,7 @@ export default function Help() {
         <DialogPrimitive.Portal>
           <div
             className={cn(
-              "fixed inset-0 z-50 flex items-center justfiy-center"
+              "fixed inset-0 z-50 flex items-center justify-center"
             )}
           >
             <DialogPrimitive.Overlay
@@ -196,7 +196,7 @@ export default function Help() {
                 <DialogPrimitive.Title
                   className={cn(
                     "mb-4 text-lg font-extrabold",
-                    "text-almost-white"
+                    "text-amlost-white"
                   )}
                 >
                   Keyboard shortcuts

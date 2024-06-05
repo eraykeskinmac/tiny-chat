@@ -1,11 +1,11 @@
-import { useStore } from "@/lib/store";
-import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
-import { Message } from "@/lib/types";
-import { Check, Code, X } from "lucide-react";
-import Loader from "../ui/Loader";
-import { cn } from "@/lib/cn";
-import { AnimatePresence, motion } from "framer-motion";
+import { useStore } from '@/lib/store';
+import { usePathname } from 'next/navigation';
+import { useEffect, useState } from 'react';
+import { Message } from '@/lib/types';
+import { Check, Code, X } from 'lucide-react';
+import Loader from '../ui/Loader';
+import { cn } from '@/lib/cn';
+import { AnimatePresence, motion } from 'framer-motion';
 
 interface ContentState {
   id: string;
@@ -16,60 +16,60 @@ interface ContentState {
 
 const CONTENT_STATES: Partial<Record<Message, ContentState>> = {
   SUCCESS: {
-    id: "success",
-    text: "Changes Saved",
+    id: 'success',
+    text: 'Changes Saved',
     icon: <Check size={16} aria-hidden="true" />,
-    additionalClasses: "text-green-400",
+    additionalClasses: 'text-green-400',
   },
   ERROR: {
-    id: "error",
-    text: "Failed to save",
+    id: 'error',
+    text: 'Failed to save',
     icon: <X size={16} aria-hidden="true" />,
-    additionalClasses: "text-red-400",
+    additionalClasses: 'text-red-400',
   },
   UNAUTHORIZED: {
-    id: "unauthorized",
+    id: 'unauthorized',
     text: "You don't have access",
-    additionalClasses: "text-red-400",
+    additionalClasses: 'text-red-400',
   },
   TOO_MANY_REQUESTS: {
-    id: "too-many-requests",
-    text: "Too many requests",
-    additionalClasses: "text-red-400",
+    id: 'too-many-requests',
+    text: 'Too many requests',
+    additionalClasses: 'text-red-400',
   },
   LIMIT_REACHED: {
-    id: "limit-reached",
-    text: "Limit reached",
-    additionalClasses: "text-red-400",
+    id: 'limit-reached',
+    text: 'Limit reached',
+    additionalClasses: 'text-red-400',
   },
   EMPTY_EDITOR: {
-    id: "empty-editor",
-    text: "Add some code first",
+    id: 'empty-editor',
+    text: 'Add some code first',
     icon: <Code size={16} aria-hidden="true" />,
   },
   CLIPBOARD_API_NOT_SUPPORTED: {
-    id: "clipboard-api-not-supported",
-    text: "Clipboard API not supported",
-    additionalClasses: "text-red-400",
+    id: 'clipboard-api-not-supported',
+    text: 'Clipboard API not supported',
+    additionalClasses: 'text-red-400',
   },
   UNKNOWN_ERROR: {
-    id: "unknown-error",
-    text: "Something went wrong",
-    additionalClasses: "text-red-400",
+    id: 'unknown-error',
+    text: 'Something went wrong',
+    additionalClasses: 'text-red-400',
   },
   SNIPPET_NOT_FOUND: {
-    id: "snippet-not-found",
-    text: "Snippet not found",
-    additionalClasses: "text-red-400",
+    id: 'snippet-not-found',
+    text: 'Snippet not found',
+    additionalClasses: 'text-red-400',
   },
   INTERNAL_SERVER_ERROR: {
-    id: "internal-server-error",
-    text: "Internal server error",
-    additionalClasses: "text-red-400",
+    id: 'internal-server-error',
+    text: 'Internal server error',
+    additionalClasses: 'text-red-400',
   },
   PENDING: {
-    id: "pending",
-    text: "Saving...",
+    id: 'pending',
+    text: 'Saving...',
     icon: <Loader />,
   },
 };
@@ -86,16 +86,16 @@ export default function Message() {
   useEffect(() => {
     let timeoutId: ReturnType<typeof setTimeout>;
 
-    if (message === "IDLE") {
+    if (message === 'IDLE') {
       setShowMessage(false);
     } else {
       setShowMessage(true);
       setContent(CONTENT_STATES[message]!);
     }
 
-    if (message !== "PENDING") {
+    if (message !== 'PENDING') {
       timeoutId = setTimeout(() => {
-        update("message", "IDLE");
+        update('message', 'IDLE');
       }, 2500);
     }
 
@@ -107,13 +107,13 @@ export default function Message() {
   }, [message, update]);
 
   useEffect(() => {
-    if (pathname === "/") {
-      update("message", "IDLE");
+    if (pathname === '/') {
+      update('message', 'IDLE');
     }
   }, [pathname, update]);
 
   return (
-    <div className={cn("absolute left-1/2 -translate-x-1/2")}>
+    <div className={cn('absolute left-1/2 -translate-x-1/2')}>
       <AnimatePresence mode="wait">
         {showMessage && content && (
           <Wrapper key={content.id} content={content} />
@@ -131,9 +131,9 @@ function Wrapper({ content }: { content: ContentState }) {
       exit={{ opacity: 0, y: 5 }}
       transition={{ duration: 0.1 }}
       className={cn(
-        "flex items-center  justify-between gap-2 p-2 text-xs",
-        "select-none",
-        content.additionalClasses
+        'flex items-center  justify-between gap-2 p-2 text-xs',
+        'select-none',
+        content.additionalClasses,
       )}
     >
       {content.icon}

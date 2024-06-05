@@ -1,5 +1,5 @@
-import { current } from "immer";
-import { LRUCache } from "lru-cache";
+import { current } from 'immer';
+import { LRUCache } from 'lru-cache';
 
 export function limiter() {
   const tokenCache = new LRUCache({
@@ -10,7 +10,7 @@ export function limiter() {
   return {
     check: async (
       limit: number,
-      token: string
+      token: string,
     ): Promise<{ allowed: boolean; retrAfter?: number }> => {
       const tokenInfo = tokenCache.get(token) as
         | { count: number; expiresAt: number }

@@ -1,15 +1,15 @@
-"use client";
+'use client';
 
-import { SUPPORTED_LANGUAGES } from "@/lib/languages";
-import { SUPPORTED_PADDING_CHOICES, SUPPORTED_THEMES } from "@/lib/theme";
+import { SUPPORTED_LANGUAGES } from '@/lib/languages';
+import { SUPPORTED_PADDING_CHOICES, SUPPORTED_THEMES } from '@/lib/theme';
 import {
   ChoiceDefinition,
   FontDefinition,
   LanguageDefinition,
   ThemeDefinition,
-} from "@/lib/types";
-import { createContext, FC, ReactNode, useContext, useState } from "react";
-import { SUPPORTED_FONT_STYLES } from "@/lib/fonts";
+} from '@/lib/types';
+import { createContext, FC, ReactNode, useContext, useState } from 'react';
+import { SUPPORTED_FONT_STYLES } from '@/lib/fonts';
 
 interface SettingsContextProps {
   language: LanguageDefinition;

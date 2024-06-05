@@ -1,7 +1,7 @@
-import { ChoiceDefinition } from "@/lib/types";
-import { RadioGroup } from "@headlessui/react";
-import clsx from "clsx";
-import { memo } from "react";
+import { ChoiceDefinition } from '@/lib/types';
+import { RadioGroup } from '@headlessui/react';
+import clsx from 'clsx';
+import { memo } from 'react';
 
 interface ChoiceProps {
   choices: ChoiceDefinition[];
@@ -21,12 +21,12 @@ export default memo(function Choices({
           <RadioGroup.Option
             key={choice.label}
             value={setValue}
-            className={clsx("cursor-pointer select-none rounded-md")}
+            className={clsx('cursor-pointer select-none rounded-md')}
           >
             <span
               className={clsx(
-                "rounded-md py-1 px-2",
-                "transition-colors duration-100 ease-in-out"
+                'rounded-md py-1 px-2',
+                'transition-colors duration-100 ease-in-out',
               )}
             >
               {choice.label}

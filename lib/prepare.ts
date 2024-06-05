@@ -1,4 +1,4 @@
-import type { AppState } from "./types";
+import type { AppState } from './types';
 
 type PreparedAppState = {
   title: string | null;
@@ -22,10 +22,10 @@ export function prepare(body: Partial<AppState>): Partial<PreparedAppState> {
   if (body.title !== undefined) {
     const trimmedTitle = body.title?.trim();
 
-    data.title = trimmedTitle !== "" ? trimmedTitle : null;
+    data.title = trimmedTitle !== '' ? trimmedTitle : null;
   }
   if (body.code !== undefined) {
-    data.code = body.code === "" ? null : body.code;
+    data.code = body.code === '' ? null : body.code;
   }
   if (body.language) {
     data.language = body.language.id;

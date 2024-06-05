@@ -1,16 +1,16 @@
-import { SUPPORTED_FONT_STYLES } from "./fonts";
-import { SUPPORTED_LANGUAGES } from "./languages";
-import { SUPPORTED_THEMES } from "./theme";
-import { AppState, AppStatus } from "./types";
+import { SUPPORTED_FONT_STYLES } from './fonts';
+import { SUPPORTED_LANGUAGES } from './languages';
+import { SUPPORTED_THEMES } from './theme';
+import { AppState, AppStatus } from './types';
 
-export const BASE_FONT_SIZES: string[] = ["12", "14", "16"];
+export const BASE_FONT_SIZES: string[] = ['12', '14', '16'];
 
-export const BASE_PADDING_VALUES: string[] = ["16", "32", "64", "128"];
+export const BASE_PADDING_VALUES: string[] = ['16', '32', '64', '128'];
 
-export const BASE_COLOR_MODES: any[] = ["rgb", "lrgb", "lab", "hsl"];
+export const BASE_COLOR_MODES: any[] = ['rgb', 'lrgb', 'lab', 'hsl'];
 
 export const DEFAULT_VALUES: AppStatus & AppState = {
-  message: "IDLE",
+  message: 'IDLE',
   hasCustomTheme: false,
   id: null,
   title: null,

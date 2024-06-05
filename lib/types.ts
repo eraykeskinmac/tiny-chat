@@ -1,5 +1,5 @@
-import { Snippet } from "@prisma/client";
-import { Extension } from "@codemirror/state";
+import { Snippet } from '@prisma/client';
+import { Extension } from '@codemirror/state';
 
 export type ChoiceDefinition = {
   id: string;
@@ -28,18 +28,18 @@ export type FontDefinition = {
 };
 
 export type Message =
-  | "SUCCESS"
-  | "ERROR"
-  | "UNAUTHORIZED"
-  | "TOO_MANY_REQUESTS"
-  | "LIMIT_REACHED"
-  | "EMPTY_EDITOR"
-  | "UNKNOWN_ERROR"
-  | "SNIPPET_NOT_FOUND"
-  | "INTERNAL_SERVER_ERROR"
-  | "PENDING"
-  | "IDLE"
-  | "CLIPBOARD_API_NOT_SUPPORTED";
+  | 'SUCCESS'
+  | 'ERROR'
+  | 'UNAUTHORIZED'
+  | 'TOO_MANY_REQUESTS'
+  | 'LIMIT_REACHED'
+  | 'EMPTY_EDITOR'
+  | 'UNKNOWN_ERROR'
+  | 'SNIPPET_NOT_FOUND'
+  | 'INTERNAL_SERVER_ERROR'
+  | 'PENDING'
+  | 'IDLE'
+  | 'CLIPBOARD_API_NOT_SUPPORTED';
 
 export type AppStatus = {
   message: Message;
@@ -71,10 +71,10 @@ export interface Store extends AppStatus, AppState {
       | boolean
       | LanguageDefinition
       | FontDefinition
-      | ThemeDefinition
+      | ThemeDefinition,
   >(
     type: T,
-    value: V
+    value: V,
   ) => void;
   setAppState: (snippet: Snippet) => void;
   getAppState: () => AppState;
