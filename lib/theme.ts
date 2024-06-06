@@ -6,50 +6,42 @@ export const SUPPORTED_THEMES: ThemeDefinition[] = [
   {
     id: 'sky',
     label: 'Sky',
-    class: 'from-sky-400 to-blue-500',
-    generatedColors: generateColors(['#38bdf8', '#3b82f6']),
+    baseColors: generateColors(['#38bdf8', '#3b82f6']),
   },
   {
     id: 'cotton_candy',
     label: 'Cotton Candy ',
-    class: 'from-violet-300 to-purple-400',
-    generatedColors: generateColors(['#c4b5fd', '#c084fc']),
+    baseColors: ['#c4b5fd', '#c084fc'],
   },
   {
     id: 'smoke',
     label: 'Smoke',
-    class: 'from-gray-900 to-gray-800',
-    generatedColors: generateColors(['#22d3ee', '#a5f3fc']),
+    baseColors: ['#22d3ee', '#a5f3fc'],
   },
   {
     id: 'honey',
     label: 'Honey',
-    class: 'from-amber-300 to-orange-500',
-    generatedColors: generateColors(['#fcd34d', '#f97316']),
+    baseColors: ['#fcd34d', '#f97316'],
   },
   {
     id: 'jade',
     label: 'Jade',
-    class: 'from-teal-400 to-emerald-600',
-    generatedColors: generateColors(['#2dd4bf', '#059669']),
+    baseColors: ['#2dd4bf', '#059669'],
   },
   {
     id: 'bubblegum',
     label: 'Bubblegum',
-    class: 'from-fuchsia-500 to-pink-400',
-    generatedColors: generateColors(['#d946ef', '#db2777']),
+    baseColors: ['#d946ef', '#db2777'],
   },
   {
     id: 'salem',
     label: 'Salem',
-    class: 'from-purpl-900 to-violet-700',
-    generatedColors: generateColors(['#581c87', '#6d28d9']),
+    baseColors: ['#581c87', '#6d28d9'],
   },
   {
     id: 'Custom',
     label: 'Custom...',
-    class: '',
-    generatedColors: [chroma.random().hex(), chroma.random().hex()],
+    baseColors: [chroma.random().hex(), chroma.random().hex()],
   },
 ];
 

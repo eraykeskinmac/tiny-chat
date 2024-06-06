@@ -10,8 +10,7 @@ export type ChoiceDefinition = {
 export type ThemeDefinition = {
   id: string;
   label: string;
-  class: string;
-  generatedColors: string[];
+  baseColors: string[];
 };
 
 export type LanguageDefinition = {
