@@ -1,3 +1,4 @@
+import chroma from 'chroma-js';
 import { generateColors } from './colors';
 import { ChoiceDefinition, ThemeDefinition } from './types';
 
@@ -43,6 +44,12 @@ export const SUPPORTED_THEMES: ThemeDefinition[] = [
     label: 'Salem',
     class: 'from-purpl-900 to-violet-700',
     generatedColors: generateColors(['#581c87', '#6d28d9']),
+  },
+  {
+    id: 'Custom',
+    label: 'Custom...',
+    class: '',
+    generatedColors: [chroma.random().hex(), chroma.random().hex()],
   },
 ];
 
