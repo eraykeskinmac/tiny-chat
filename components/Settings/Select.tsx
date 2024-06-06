@@ -42,14 +42,14 @@ export default memo(function Select<
     theme: {
       initialValue: (
         <ThemeBubble
-          colors={(value as ThemeDefinition).generatedColors}
+          colors={(value as ThemeDefinition).baseColors}
           useCustomColorsFromStore={value.id === 'custom'}
         />
       ),
       optionContent: (option: T) => (
         <div className={cn('flex items-center gap-3')}>
           <ThemeBubble
-            colors={(option as ThemeDefinition).generatedColors}
+            colors={(option as ThemeDefinition).baseColors}
             useCustomColorsFromStore={value.id === 'custom'}
           />
           <span className={cn('block truncate')}>

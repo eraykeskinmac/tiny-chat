@@ -21,7 +21,7 @@ export const DEFAULT_VALUES: AppStatus & AppState = {
   fontSize: BASE_FONT_SIZES.at(1)!,
   lineNumbers: true,
   padding: BASE_PADDING_VALUES.at(1)!,
-  customColors: SUPPORTED_THEMES.at(-1)!.generatedColors,
+  customColors: SUPPORTED_THEMES.at(-1)!.baseColors,
   colorMode: BASE_COLOR_MODES.at(0)!,
   angle: 145,
   grain: false,

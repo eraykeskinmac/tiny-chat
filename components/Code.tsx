@@ -70,7 +70,7 @@ export default function Code({ placeholder, initialValue }: CodeProps) {
     },
   });
 
-  const c = theme.generatedColors;
+  const c = theme.baseColors;
 
   const myTheme = createTheme({
     theme: 'dark',
@@ -192,7 +192,6 @@ export default function Code({ placeholder, initialValue }: CodeProps) {
         'relative z-0 w-auto min-w-[512px] max-w-5xl',
         padding.class,
         'bg-gradient-to-br',
-        theme.class,
         'transition-all duration-200 ease-in-out',
       )}
     >
@@ -210,7 +209,6 @@ export default function Code({ placeholder, initialValue }: CodeProps) {
             className={clsx(
               'absolute inset-0 z-[3] rounded-xl',
               'bg-gradient-to-br',
-              theme.class,
             )}
           />
         </div>

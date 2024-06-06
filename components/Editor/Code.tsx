@@ -31,8 +31,8 @@ export default function Code({ editable = false }: { editable: boolean }) {
   const update = useStore((state) => state.update);
 
   const baseColors = useMemo(() => {
-    return hasCustomTheme ? customColors : theme.generatedColors;
-  }, [hasCustomTheme, theme.generatedColors, customColors]);
+    return hasCustomTheme ? customColors : theme.baseColors;
+  }, [hasCustomTheme, theme.baseColors, customColors]);
 
   const generatedColors = useMemo(() => {
     return generateColors(baseColors);
@@ -91,7 +91,7 @@ export default function Code({ editable = false }: { editable: boolean }) {
   const lineWrapping = EditorView.lineWrapping;
   const setTabIndex = EditorView.contentAttributes.of({ tabIndex: '-1' });
 
-  const c = theme.generatedColors;
+  const c = theme.baseColors;
 
   const customEditorTheme = createTheme({
     theme: 'dark',

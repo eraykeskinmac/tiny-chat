@@ -26,8 +26,8 @@ export default function Wrapper({ children }: { children: ReactNode }) {
   const grain = useStore((state) => state.grain);
 
   const baseColors = useMemo(() => {
-    return hasCustomTheme ? customColors : theme.generatedColors;
-  }, [hasCustomTheme, theme.generatedColors, customColors]);
+    return hasCustomTheme ? customColors : theme.baseColors;
+  }, [hasCustomTheme, theme.baseColors, customColors]);
 
   const gradientColors = useMemo(() => {
     return baseColors.length === 1
