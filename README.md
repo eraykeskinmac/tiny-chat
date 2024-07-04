@@ -1,36 +1,83 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Code Snippet
+
+Code Snippet is a modern web application designed to help developers manage and share code snippets efficiently. Built with Next.js, Prisma, and Tailwind CSS, it offers a robust platform for organizing and customizing your code snippets.
+
+## Features
+
+- **User Authentication**: Secure login via GitHub using NextAuth.
+- **Snippet Management**: Create, update, and delete your code snippets with ease.
+- **Tagging System**: Organize your snippets with tags for quick retrieval.
+- **View Tracking**: Keep track of how many times your snippets have been viewed.
+- **Rate Limiting**: Protects the API from abuse and ensures fair usage.
+- **Customization**: Personalize your snippets with various themes, font sizes, and colors.
+
+## Technologies Used
+
+- **Next.js**: React framework for server-side rendering and static site generation.
+- **Prisma**: ORM for efficient database management.
+- **Tailwind CSS**: Utility-first CSS framework for styling.
+- **TypeScript**: Strongly typed programming language for enhanced development experience.
+- **NextAuth**: Authentication library for Next.js applications.
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- Node.js (v14 or later)
+- npm or yarn
+- A GitHub account for authentication
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Installation
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+1. Clone the repository:
+   ```
+   git clone https://github.com/eraykeskinmac/code-snippet.git
+   cd code-snippet
+   ```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+2. Install dependencies:
+   ```
+   npm install
+   # or
+   yarn install
+   ```
 
-## Learn More
+3. Set up environment variables:
+   Create a `.env` file in the root directory and add the following:
+   ```
+   DATABASE_URL="your_database_url"
+   GITHUB_ID="your_github_oauth_id"
+   GITHUB_SECRET="your_github_oauth_secret"
+   NEXTAUTH_SECRET="your_nextauth_secret"
+   ```
 
-To learn more about Next.js, take a look at the following resources:
+4. Run database migrations:
+   ```
+   npx prisma migrate dev
+   ```
 
-- [Next.js Documentation](https://nextjs.org/docs) - Learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - An interactive Next.js tutorial.
+5. Start the development server:
+   ```
+   npm run dev
+   # or
+   yarn dev
+   ```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - Your feedback and contributions are welcome!
+6. Open [http://localhost:3000](http://localhost:3000) in your browser to see the application.
 
-## Deploy on Vercel
+## Project Structure
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- `app/`: Contains the main application code and API routes.
+- `components/`: Reusable React components.
+- `lib/`: Utility functions and shared code.
+- `prisma/`: Database schema and migrations.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
