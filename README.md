@@ -1,6 +1,6 @@
 # Tiny Code
 
-Tiny COde is a modern web application designed to help developers manage and share code snippets efficiently. Built with Next.js, Prisma, and Tailwind CSS, it offers a robust platform for organizing and customizing your code snippets.
+Tiny Code is a modern web application designed to help developers manage and share code snippets efficiently. Built with Next.js, Prisma, and Tailwind CSS, it offers a robust platform for organizing and customizing your code snippets.
 
 ## Features
 
